@@ -1,0 +1,35 @@
+body {
+  font-family: monospace;
+}
+
+.doctype::before {
+  content: "<!DOCTYPE html>";
+}
+
+.element > .element {
+  margin-left: 1em;
+}
+.element-open::before {
+  content: "<";
+}
+.element-open::after {
+  content: ">";
+}
+.element-close::before {
+  content: "</";
+}
+.element-close::after {
+  content: ">";
+}
+
+.attribute {
+  margin-left: 0.5em;
+}
+.attribute-value::before {
+  content: '="';
+}
+.attribute-value::after {
+  content: '"';
+}
+
+/* vim: set ts=2 sw=2 et: */

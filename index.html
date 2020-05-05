@@ -2,76 +2,10 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="index.js"></script>
     <title>mizkichan.github.io</title>
-
-    <style>
-      body {
-        font-family: monospace;
-      }
-      .children {
-        margin-left: 1em;
-      }
-    </style>
-
-    <script>
-      const newNode = node => {
-        if (node instanceof Element) {
-          return newElement(node);
-        } else if (node instanceof Text) {
-          return newText(node.data);
-        } else {
-          throw new Error(node);
-        }
-      };
-
-      const newElement = element => {
-        const children = document.createElement("div");
-        children.className = "children";
-        for (const childNode of element.childNodes) {
-          children.appendChild(newNode(childNode));
-        }
-
-        const open = document.createElement("div");
-        open.className = "open";
-        open.appendChild(new Text("<"));
-        open.appendChild(new Text(element.localName));
-        open.appendChild(new Text(">"));
-
-        const close = document.createElement("div");
-        close.className = "close";
-        close.appendChild(new Text("</"));
-        close.appendChild(new Text(element.localName));
-        close.appendChild(new Text(">"));
-
-        const wrapper = document.createElement("div");
-        wrapper.classList.add = "wrapper";
-        wrapper.appendChild(open);
-        wrapper.appendChild(children);
-        wrapper.appendChild(close);
-        return wrapper;
-      };
-
-      const newText = data => {
-        const div = document.createElement("div");
-        div.className = "text";
-        div.appendChild(new Text(data));
-        return div;
-      };
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const doctype = document.createElement("div");
-        doctype.appendChild(new Text("<!DOCTYPE "));
-        doctype.appendChild(new Text(document.doctype.name));
-        doctype.appendChild(new Text(">"));
-
-        const body = document.createElement("body");
-        body.appendChild(doctype);
-        body.appendChild(newElement(document.documentElement));
-        document.documentElement.replaceChild(body, document.body);
-      });
-    </script>
   </head>
-
   <body>
     <header>
       <h1>mizkichan.github.io</h1>
